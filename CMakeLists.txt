@@ -28,8 +28,8 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/src )
 file( GLOB TargetSources ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp)
 file( GLOB TestSources ${CMAKE_CURRENT_SOURCE_DIR}/test/*.cpp)
 
-add_executable( actors main.cpp ${TargetSources} )
-target_link_libraries( actors PRIVATE CAF::internal CAF::core )
+add_executable( actors_main main.cpp ${TargetSources} )
+target_link_libraries( actors_main PRIVATE CAF::internal CAF::core )
 
 add_executable( actors_tests ${TestSources} )
 target_link_libraries( actors_tests PRIVATE CAF::internal CAF::core CAF::test gtest )

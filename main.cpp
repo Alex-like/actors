@@ -11,9 +11,11 @@ using namespace search_actor;
 
 void caf_main(actor_system& system) {
     string msg;
-    unordered_map<search_system_t, shared_ptr<search_client_t>> clients;
-    for (const auto& sys : all_search_system)
-        clients[sys] = make_shared<search_client_stub>(1s);
+    unordered_map<search_system_t, shared_ptr<search_client_t>> clients = {
+            {search_system_t::Google, make_shared<search_client_stub>(1s)},
+            {search_system_t::Yandex, make_shared<search_client_stub>(10s)},
+            {search_system_t::Bing, make_shared<search_client_stub>(2s)}
+    };
     while (cin >> msg) {
         scoped_actor self{system};
         auto master =  self->spawn<stateful_actor<master_state>>(clients, 2s);
